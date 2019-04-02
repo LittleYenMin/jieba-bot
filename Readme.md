@@ -6,6 +6,6 @@ Bot for Chinese text segmentation
 2. Split text by jeiba
 3. Return result by LINE REPLY API
 
-Example:
+LINE friend qrcode:
 ----------
-![](https://qr-official.line.me/M/gb31-EZZLS.png?raw=true)
+![qrcode](https://qr-official.line.me/M/gb31-EZZLS.png)
