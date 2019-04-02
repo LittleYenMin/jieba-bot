@@ -38,9 +38,10 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    text = jieba.cut(event.message.text)
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text))
+        TextSendMessage(text=", ".join(seg_list)))
 
 if __name__ == "__main__":
     app.run()
