@@ -8,4 +8,4 @@ Bot for Chinese text segmentation
 
 LINE friend qrcode:
 ----------
-![qrcode](https://qr-official.line.me/M/gb31-EZZLS.png)
+![qrcode](https://i.imgur.com/uf5CDFZ.png)
