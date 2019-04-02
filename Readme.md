@@ -21,3 +21,8 @@ Chinese text segmentation framework.
 
 [line-bot-sdk](https://github.com/line/line-bot-sdk-python)
 SDK of the LINE Messaging API.
+
+Contributor
+-----------
+[林子篆](https://github.com/dannypsnl)
+developer consultant and best reviewer
