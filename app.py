@@ -41,7 +41,7 @@ def handle_message(event):
     text = jieba.cut(event.message.text)
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=", ".join(seg_list)))
+        TextSendMessage(text=", ".join(text)))
 
 if __name__ == "__main__":
     app.run()
