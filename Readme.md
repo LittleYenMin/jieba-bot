@@ -25,4 +25,4 @@ SDK of the LINE Messaging API.
 Contributor
 -----------
 [林子篆](https://github.com/dannypsnl)
-developer consultant and best reviewer
+Development consultant and best reviewer
