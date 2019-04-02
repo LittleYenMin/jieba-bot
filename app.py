@@ -37,7 +37,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    text = nlu.execute(event.message.text)
+    text = nlu.response_message(event.message.text)
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=text))
