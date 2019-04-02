@@ -1,5 +1,5 @@
 import os
-import jieba
+
 
 from flask import Flask, request, abort
 from linebot import (
@@ -12,6 +12,8 @@ from linebot.exceptions import (
 from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
+
+import nlu
 
 app = Flask(__name__)
 
@@ -38,10 +40,10 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    text = jieba.cut(event.message.text)
+    text = nlu.execute(event.message.text)
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=", ".join(text)))
+        TextSendMessage(text=text))
 
 if __name__ == "__main__":
     app.run()
