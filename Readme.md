@@ -8,4 +8,4 @@ Bot for Chinese text segmentation
 
 Example:
 ----------
-![](https://qr-official.line.me/M/gb31-EZZLS.png)
+![](https://qr-official.line.me/M/gb31-EZZLS.png?raw=true)
