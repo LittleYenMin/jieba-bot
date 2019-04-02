@@ -1,8 +1,11 @@
-from flask import Flask, request, abort
+import os
+import jieba
 
+from flask import Flask, request, abort
 from linebot import (
     LineBotApi, WebhookHandler
 )
+
 from linebot.exceptions import (
     InvalidSignatureError
 )
@@ -12,9 +15,8 @@ from linebot.models import (
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('YOUR_CHANNEL_ACCESS_TOKEN')
-handler = WebhookHandler('YOUR_CHANNEL_SECRET')
-
+line_bot_api = LineBotApi(os.getenv('LINE_CHANNEL_ACCESS_TOKEN', ''))
+handler = WebhookHandler(os.getenv('LINE_CHANNEL_SECRET', ''))
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -34,13 +36,11 @@ def callback():
 
     return 'OK'
 
-
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=event.message.text))
-
 
 if __name__ == "__main__":
     app.run()
