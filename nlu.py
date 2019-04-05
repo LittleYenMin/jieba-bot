@@ -37,7 +37,7 @@ def _get_frequency(source: set, text_sequence: [str]) -> [int]:
     frequency = {}
     for text in text_sequence:
         if text in source:
-            value = frequency[text]
+            value = frequency.get(text)
             if value is None:
                 value = 1
             else:
