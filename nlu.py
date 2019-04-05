@@ -28,9 +28,9 @@ def _consine_similarity(question: [str], text_sequence: [str]) -> float:
 
 
 def _cosine_theta(a: [int], b: [int]):
-    bottom = (sum(pow(n, 2) for n in a) ** 0.5)*(sum(pow(n, 2) for n in b) ** 0.5)
-    top = sum(a[i] * b[i] for i in range(len(a)))
-    return top/bottom
+    denominator = (sum(pow(n, 2) for n in a) ** 0.5)*(sum(pow(n, 2) for n in b) ** 0.5)
+    numerator = sum(a[i] * b[i] for i in range(len(a)))
+    return numerator/denominator
 
 
 def _get_frequency(source: set, text_sequence: [str]) -> [int]:
