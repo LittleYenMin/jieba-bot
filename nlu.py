@@ -1,22 +1,26 @@
 import jieba
 
-command_mapping = {'曠課': '昌昌;曠課', '課表': '昌昌;課表', '成績': '昌昌;成績'}
+command_map = {'曠課': '昌昌;曠課', '課表': '昌昌;課表', '成績': '昌昌;成績'}
 
 
-def response_message(text: str) -> str:
+def response_message(text: str) -> list:
+    messages = []
     cmds = _get_commands(jieba.cut(text))
-    return _exec_command(cmds)
+    for cmd in cmds:
+        messages.append(_exec_command(cmd))
+    return messages
 
 
 def _get_commands(text_sequence: [str]) -> set:
-    commands = set()
+    possible_commands = set()
     for text in text_sequence:
-        if text in command_mapping:
-            commands.add(command_mapping.get(text))
-    return commands
+        cmd = command_map.get(text)
+        if cmd is not None:
+            possible_commands.add(cmd)
+    return possible_commands
 
 
-def _exec_command(cmds: set) -> str:
+def _exec_command(cmd: str) -> str:
     """exec the command and return response
 
     Parameters:
