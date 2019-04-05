@@ -20,6 +20,34 @@ def _get_commands(text_sequence: [str]) -> set:
     return possible_commands
 
 
+def _consine_similarity(question: [str], text_sequence: [str]) -> float:
+    words = set(question+text_sequence)
+    question_frequency = _get_frequency(words, question)
+    text_frequency = _get_frequency(words, text_sequence)
+    return _cosine_theta(question_frequency, text_frequency)
+
+
+def _cosine_theta(a: [int], b: [int]):
+    bottom = (sum(pow(n, 2) for n in a) ** 0.5)*(sum(pow(n, 2) for n in b) ** 0.5)
+    top = sum(a[i] * b[i] for i in range(len(a)))
+    return top/bottom
+
+
+def _get_frequency(source: set, text_sequence: [str]) -> [int]:
+    frequency = {}
+    for text in text_sequence:
+        if text in source:
+            value = frequency[text]
+            if value is None:
+                value = 1
+            else:
+                value += 1
+            frequency[text] = value
+        else:
+            frequency[text] = 0
+    return list(frequency.values())
+
+
 def _exec_command(cmd: str) -> str:
     """exec the command and return response
 
