@@ -26,3 +26,6 @@ Contributor
 -----------
 [林子篆](https://github.com/dannypsnl)
 Development consultant and best reviewer
+
+[陳彥合](https://github.com/YanHerChen)
+NLP consultant
