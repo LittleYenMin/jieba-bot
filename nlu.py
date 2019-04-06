@@ -20,11 +20,11 @@ def _get_commands(text_sequence: [str]) -> set:
     return possible_commands
 
 
-def _consine_similarity(question: [str], text_sequence: [str]) -> float:
-    words = set(question+text_sequence)
-    question_frequency = _get_frequency(words, question)
-    text_frequency = _get_frequency(words, text_sequence)
-    return _cosine_theta(question_frequency, text_frequency)
+def _consine_similarity(a: [str], b: [str]) -> float:
+    words = set(a+b)
+    a_frequency = _get_frequency(words, a)
+    b_frequency = _get_frequency(words, b)
+    return _cosine_theta(a_frequency, b_frequency)
 
 
 def _cosine_theta(a: [int], b: [int]):
