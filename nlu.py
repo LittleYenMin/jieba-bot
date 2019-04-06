@@ -28,8 +28,8 @@ def _consine_similarity(a: [str], b: [str]) -> float:
 
 
 def _cosine_theta(a: [int], b: [int]):
+    numerator = sum(a * b for a, b in zip(a, b))
     denominator = _dot(a)*_dot(b)
-    numerator = sum(a[i] * b[i] for i in range(min(len(a), len(b))))
     return numerator/denominator
 
 
