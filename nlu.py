@@ -38,12 +38,7 @@ def _dot(v: [int]) -> float:
 
 
 def _word2vector(all_words: set, text_sequence: [str]) -> [int]:
-    frequency = {}
-    # create default table by all_words
-    for word in all_words:
-        v = frequency.get(word)
-        if v is None:
-            frequency[word] = 0
+    frequency = dict.fromkeys(all_words, 0)
     for text in text_sequence:
         if text in all_words:
             value = frequency.get(text)
