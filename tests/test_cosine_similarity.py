@@ -9,5 +9,4 @@ def test_cosine_similarity():
     user_input_similarity = nlu._consine_similarity(question_segment, user_input_segment)
     other_input_similarity = nlu._consine_similarity(question_segment, other_input_segment)
     # user input is more similar then other_input
-    print(user_input_similarity, other_input_similarity)
     assert user_input_similarity > other_input_similarity
