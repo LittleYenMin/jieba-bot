@@ -29,7 +29,7 @@ def _consine_similarity(question: [str], text_sequence: [str]) -> float:
 
 def _cosine_theta(a: [int], b: [int]):
     denominator = (sum(pow(n, 2) for n in a) ** 0.5)*(sum(pow(n, 2) for n in b) ** 0.5)
-    numerator = sum(a[i] * b[i] for i in range(len(a)))
+    numerator = sum(a[i] * b[i] for i in range(min(len(a), len(b))))
     return numerator/denominator
 
 
