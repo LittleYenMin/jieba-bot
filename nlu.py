@@ -22,9 +22,9 @@ def _get_commands(text_sequence: [str]) -> set:
 
 def _consine_similarity(a: [str], b: [str]) -> float:
     words = set(a+b)
-    a_frequency = _get_frequency(words, a)
-    b_frequency = _get_frequency(words, b)
-    return _cosine_theta(a_frequency, b_frequency)
+    vector_a = _word2vector(words, a)
+    vector_b = _word2vector(words, b)
+    return _cosine_theta(vector_a, vector_b)
 
 
 def _cosine_theta(a: [int], b: [int]):
@@ -37,8 +37,13 @@ def _dot(v: [int]) -> float:
     return sum(pow(n, 2) for n in v) ** 0.5
 
 
-def _get_frequency(all_words: set, text_sequence: [str]) -> [int]:
+def _word2vector(all_words: set, text_sequence: [str]) -> [int]:
     frequency = {}
+    # create default table by all_words
+    for word in all_words:
+        v = frequency.get(word)
+        if v is None:
+            frequency[word] = 0
     for text in text_sequence:
         if text in all_words:
             value = frequency.get(text)
