@@ -33,10 +33,10 @@ def _cosine_theta(a: [int], b: [int]):
     return numerator/denominator
 
 
-def _get_frequency(source: set, text_sequence: [str]) -> [int]:
+def _get_frequency(all_words: set, text_sequence: [str]) -> [int]:
     frequency = {}
     for text in text_sequence:
-        if text in source:
+        if text in all_words:
             value = frequency.get(text)
             if value is None:
                 value = 1
