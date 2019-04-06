@@ -1,15 +1,12 @@
 import pytest
 import nlu
 
-@pytest.fixture()
-def source():
-    return ['我', '喜歡', '看', '電視', '不', '喜歡', '看', '電影']
 
-
-@pytest.fixture()
-def target():
-    return ['我', '不', '喜歡', '看', '電視', '也', '不', '喜歡', '看', '電影']
-
-
-def test_cosine_similarity(source, target):
-    assert nlu._consine_similarity(source, target) == 0.9381941874331419
+def test_cosine_similarity():
+    question = ['a', 'b']
+    user_input = ['a', 'c']
+    other_input = ['c']
+    user_input_similarity = nlu._consine_similarity(question, user_input)
+    other_input_similarity = nlu._consine_similarity(question, other_input)
+    # user input is more similar then other_input
+    assert user_input_similarity > other_input_similarity
