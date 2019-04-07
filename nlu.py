@@ -30,7 +30,7 @@ def _similarity(a: [str], b: [str]) -> float:
 
 def _consine_similarity(a: [int], b: [int]) -> float:
     if len(a) != len(b):
-        raise ValueError('list a and list b must have the same length')
+        raise ValueError('vector a len: {} and vector b len: {} must have the same length'.format(len(a), len(b)))
     numerator = sum(x1 * x2 for x1, x2 in zip(a, b))
     denominator = _dot(a) * _dot(b)
     return numerator / denominator
