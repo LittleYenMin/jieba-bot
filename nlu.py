@@ -1,4 +1,4 @@
-import cmath
+import math
 import jieba
 
 command_map = {'曠課': '昌昌;曠課', '課表': '昌昌;課表', '成績': '昌昌;成績'}
@@ -28,7 +28,7 @@ def _similarity(a: [str], b: [str]) -> float:
     return _consine_similarity(vector_a, vector_b)
 
 
-def _consine_similarity(a: [int], b: [int]):
+def _consine_similarity(a: [int], b: [int]) -> float:
     if len(a) != len(b):
         raise ValueError('list a and list b must have the same length')
     numerator = sum(expression1 * expression2 for expression1, expression2 in zip(a, b))
@@ -37,9 +37,8 @@ def _consine_similarity(a: [int], b: [int]):
 
 
 def _dot(vec: [int]) -> float:
-    return cmath.sqrt(
-        sum(pow(v, 2) for v in vec)
-    )
+    temp = sum(pow(v, 2) for v in vec)
+    return math.sqrt(temp)
 
 
 def _get_vec(all_words: set, seq: [str]) -> [int]:
