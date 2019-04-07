@@ -43,18 +43,14 @@ def _dot(vec: [int]) -> float:
 
 
 def _word2vector(all_words: set, text_sequence: [str]) -> [int]:
-    frequency = dict.fromkeys(all_words, 0)
-    for text in text_sequence:
-        if text in all_words:
-            value = frequency.get(text)
-            if value is None:
-                value = 1
-            else:
-                value += 1
-            frequency[text] = value
+    frequencies = dict.fromkeys(all_words, 0)
+    for word in text_sequence:
+        if word in all_words:
+            value = frequencies.get(word, 0)+1
+            frequencies[word] = value
         else:
-            frequency[text] = 0
-    return list(frequency.values())
+            frequencies[word] = 0
+    return list(frequencies.values())
 
 
 def _exec_command(cmd: str) -> str:
