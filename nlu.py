@@ -1,3 +1,4 @@
+import cmath
 import jieba
 
 command_map = {'曠課': '昌昌;曠課', '課表': '昌昌;課表', '成績': '昌昌;成績'}
@@ -35,8 +36,10 @@ def _consine_similarity(a: [int], b: [int]):
     return numerator/denominator
 
 
-def _dot(v: [int]) -> float:
-    return sum(pow(n, 2) for n in v) ** 0.5
+def _dot(vec: [int]) -> float:
+    return cmath.sqrt(
+        sum(pow(v, 2) for v in vec)
+    )
 
 
 def _word2vector(all_words: set, text_sequence: [str]) -> [int]:
