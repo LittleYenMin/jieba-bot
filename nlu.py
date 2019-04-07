@@ -23,8 +23,8 @@ def _get_commands(text_sequence: [str]) -> set:
 
 def _similarity(a: [str], b: [str]) -> float:
     words = set(a+b)
-    vector_a = _word2vector(words, a)
-    vector_b = _word2vector(words, b)
+    vector_a = _get_vec(words, a)
+    vector_b = _get_vec(words, b)
     return _consine_similarity(vector_a, vector_b)
 
 
@@ -42,15 +42,13 @@ def _dot(vec: [int]) -> float:
     )
 
 
-def _word2vector(all_words: set, text_sequence: [str]) -> [int]:
-    frequencies = dict.fromkeys(all_words, 0)
-    for word in text_sequence:
-        if word in all_words:
-            value = frequencies.get(word, 0)+1
-            frequencies[word] = value
-        else:
-            frequencies[word] = 0
-    return list(frequencies.values())
+def _get_vec(all_words: set, seq: [str]) -> [int]:
+    vec = [0] * len(all_words)
+    for i, word in enumerate(all_words):
+        for v in seq:
+            if v == word:
+                vec[i] += 1
+    return vec
 
 
 def _exec_command(cmd: str) -> str:
