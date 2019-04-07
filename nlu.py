@@ -22,7 +22,7 @@ def _get_commands(text_sequence: [str]) -> set:
 
 
 def _similarity(a: [str], b: [str]) -> float:
-    words = set(a+b)
+    words = set(a + b)
     vector_a = _get_vec(words, a)
     vector_b = _get_vec(words, b)
     return _consine_similarity(vector_a, vector_b)
@@ -31,9 +31,9 @@ def _similarity(a: [str], b: [str]) -> float:
 def _consine_similarity(a: [int], b: [int]) -> float:
     if len(a) != len(b):
         raise ValueError('list a and list b must have the same length')
-    numerator = sum(expression1 * expression2 for expression1, expression2 in zip(a, b))
-    denominator = _dot(a)*_dot(b)
-    return numerator/denominator
+    numerator = sum(x1 * x2 for x1, x2 in zip(a, b))
+    denominator = _dot(a) * _dot(b)
+    return numerator / denominator
 
 
 def _dot(vec: [int]) -> float:
