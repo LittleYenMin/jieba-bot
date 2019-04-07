@@ -20,15 +20,17 @@ def _get_commands(text_sequence: [str]) -> set:
     return possible_commands
 
 
-def _consine_similarity(a: [str], b: [str]) -> float:
+def _similarity(a: [str], b: [str]) -> float:
     words = set(a+b)
     vector_a = _word2vector(words, a)
     vector_b = _word2vector(words, b)
-    return _cosine_theta(vector_a, vector_b)
+    return _consine_similarity(vector_a, vector_b)
 
 
-def _cosine_theta(a: [int], b: [int]):
-    numerator = sum(x1 * x2 for x1, x2 in zip(a, b))
+def _consine_similarity(a: [int], b: [int]):
+    if len(a) != len(b):
+        raise ValueError('list a and list b must have the same length')
+    numerator = sum(expression1 * expression2 for expression1, expression2 in zip(a, b))
     denominator = _dot(a)*_dot(b)
     return numerator/denominator
 
