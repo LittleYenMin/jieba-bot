@@ -15,10 +15,10 @@ def similarity(question, segment) -> float:
 
 
 def test_cosine_similarity():
-    question_segment = ['我', '要', '查', '成績']
-    user_input_segment = ['我', '想', '查', '成績']
-    other_input_segment = ['我', '成績', '沒', '考', '好']
-    user_input_similarity = nlu._similarity(question_segment, user_input_segment)
-    other_input_similarity = nlu._similarity(question_segment, other_input_segment)
+    question = '我要查成績'
+    user_input = '查成績'
+    other_input = '我成績沒考好'
+    user_input_similarity = similarity(question, user_input)
+    other_input_similarity = similarity(question, other_input)
     # user input is more similar then other_input
     assert user_input_similarity > other_input_similarity
