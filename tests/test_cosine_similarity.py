@@ -1,5 +1,17 @@
+import logging
 import pytest
+import jieba
 import nlu
+
+
+jieba.setLogLevel(logging.ERROR)
+jieba.initialize()
+
+
+def similarity(question, segment) -> float:
+    question_list = jieba.lcut(question)
+    segment_list = jieba.lcut(segment)
+    return nlu._similarity(question_list, segment_list)
 
 
 def test_cosine_similarity():
