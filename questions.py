@@ -1,4 +1,4 @@
-class Questions:
+class ExampleQuestion:
 
     def __init__(self, question: str, command_type: str):
         self.question = question
