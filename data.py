@@ -6,7 +6,7 @@ from questions import Questions
 class Source:
 
     @staticmethod
-    def from_csv(path: str = './data.csv') -> [Questions]:
+    def from_csv(path: str) -> [Questions]:
         questions = []
         with open(path, 'r', encoding='utf-8') as f:
             csv = csv_reader(f)
