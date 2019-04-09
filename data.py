@@ -8,9 +8,9 @@ class Source:
     @staticmethod
     def from_csv(iterable: any) -> [ExampleQuestion]:
         questions = []
-        content = csv.reader(iterable)
-        next(content, None)  # escape headers is useless now
-        for row in content:
+        csv_reader = csv.reader(iterable)
+        next(csv_reader, None)  # escape headers is useless now
+        for row in csv_reader:
             questions.append(
                 ExampleQuestion(
                     question=row[0],
