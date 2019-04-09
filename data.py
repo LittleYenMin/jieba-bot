@@ -12,5 +12,5 @@ class Source:
             csv = csv_reader(f)
             next(csv, None)  # escape headers is useless now
             for row in csv:
-                questions.append(Questions(question=row[0], answer=row[1]))
+                questions.append(Questions(question=row[0], command_type=row[1]))
         return questions
