@@ -1,4 +1,4 @@
-import csv
+from csv import reader as csv_reader
 
 from questions import Questions
 
@@ -9,8 +9,8 @@ class Source:
     def from_csv(path: str = './data.csv') -> [Questions]:
         questions = []
         with open(path, 'r', encoding='utf-8') as f:
-            reader = csv.reader(f)
-            _ = next(reader, None)  # escape headers
-            for row in reader:
+            csv = csv_reader(f)
+            _ = next(csv, None)  # escape headers is useless now
+            for row in csv:
                 questions.append(Questions(question=row[0], answer=row[1]))
         return questions
