@@ -5,4 +5,5 @@ class Questions:
         self.answer = answer
 
     def __repr__(self):
-        return '<Questions {question} {answer}>'.format(question=self.question, answer=self.answer)
+        return '<Questions {question} {answer}>'.format(
+            question=self.question, answer=self.answer)
