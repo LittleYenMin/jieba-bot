@@ -9,8 +9,7 @@ class Source:
         questions = []
         with open(path, 'r', encoding='utf-8') as f:
             reader = csv.reader(f)
-            # headers
-            _ = next(reader, None)
+            _ = next(reader, None)  # escape headers
             for row in reader:
                 questions.append(Questions(question=row[0], answer=row[1]))
         return questions
