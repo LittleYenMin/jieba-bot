@@ -9,6 +9,13 @@ class Intent(object):
         self.score = score
 
 
+def questions(word: str, questions: [ExampleQuestion]) -> [Intent]:
+    intents = _questions(word, questions)
+    result = [Intent(intent=intent, score=score)
+              for intent, score in intents.items()]
+    return result
+
+
 def _questions(word: str, questions: [ExampleQuestion]) -> dict:
     """
         >>> questions('我想查成績', [ExampleQuestion('我想查成績', '成績'), ExampleQuestion('我想查曠課', '曠課')])
