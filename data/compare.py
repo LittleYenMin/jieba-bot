@@ -3,7 +3,13 @@ import nlu
 from questions import ExampleQuestion
 
 
-def questions(word: str, questions: [ExampleQuestion]) -> dict:
+class Intent(object):
+    def __init__(self, intent: str, score: float):
+        self.intent = intent
+        self.score = score
+
+
+def _questions(word: str, questions: [ExampleQuestion]) -> dict:
     """
         >>> questions('我想查成績', [ExampleQuestion('我想查成績', '成績'), ExampleQuestion('我想查曠課', '曠課')])
         {'成績': 0.9999999999999998, '曠課': 0.4999999999999999}
