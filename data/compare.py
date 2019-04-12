@@ -18,8 +18,8 @@ def questions(word: str, questions: [ExampleQuestion]) -> [Intent]:
 
 def _questions(word: str, questions: [ExampleQuestion]) -> dict:
     """
-        >>> questions('我想查成績', [ExampleQuestion('我想查成績', '成績'), ExampleQuestion('我想查曠課', '曠課')])
-        {'成績': 0.9999999999999998, '曠課': 0.4999999999999999}
+    >>> _questions('question-1', [ExampleQuestion('question-1', 'answer-A'), ExampleQuestion('question-2', 'answer-B')])
+    {'answer-A': 1.0000000000000002, 'answer-B': 0.6666666666666667}
         """
     intents = dict.fromkeys(list(q.command_type for q in questions), 0)
     for question in questions:
