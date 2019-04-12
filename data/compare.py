@@ -8,6 +8,10 @@ class Intent(object):
         self.intent = intent
         self.score = score
 
+    def __repr__(self):
+        return '<Intent {intent} {score}>'.format(
+            intent=self.intent, score=self.score)
+
 
 def questions(word: str, questions: [ExampleQuestion]) -> [Intent]:
     intents = _questions(word, questions)
