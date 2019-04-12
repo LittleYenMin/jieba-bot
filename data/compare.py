@@ -14,6 +14,10 @@ class Intent(object):
 
 
 def questions(word: str, questions: [ExampleQuestion]) -> [Intent]:
+    """
+    >>> questions('question-1', [ExampleQuestion('question-1', 'answer-A'), ExampleQuestion('question-2', 'answer-B')])
+    [<Intent answer-A 1.0000000000000002>, <Intent answer-B 0.6666666666666667>]
+            """
     intents = _questions(word, questions)
     result = [Intent(intent=intent, score=score)
               for intent, score in intents.items()]
