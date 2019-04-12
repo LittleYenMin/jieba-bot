@@ -11,7 +11,7 @@ def from_csv_file(path: str) -> [questions.ExampleQuestion]:
 def from_csv(iterable: any) -> [questions.ExampleQuestion]:
     result = []
     csv_reader = csv.reader(iterable)
-    next(csv_reader, None)  # escape headers is useless now
+    next(csv_reader, None)  # escape headers is useless here.
     for row in csv_reader:
         result.append(
             questions.ExampleQuestion(
