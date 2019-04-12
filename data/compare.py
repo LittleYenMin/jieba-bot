@@ -15,8 +15,8 @@ class Intent(object):
 
 def questions(word: str, questions: [ExampleQuestion]) -> [Intent]:
     """
-    >>> questions('question-1', [ExampleQuestion('question-1', 'answer-A'), ExampleQuestion('question-2', 'answer-B')])
-    [<Intent answer-A 1.0000000000000002>, <Intent answer-B 0.6666666666666667>]
+    >>> questions('question-1-3', [ExampleQuestion('question-1', 'answer-A'), ExampleQuestion('question-2', 'answer-B')])
+    [<Intent answer-A 0.8728715609439696>, <Intent answer-B 0.6546536707079772>]
             """
     intents = _questions(word, questions)
     result = [Intent(intent=intent, score=score)
@@ -26,8 +26,8 @@ def questions(word: str, questions: [ExampleQuestion]) -> [Intent]:
 
 def _questions(word: str, questions: [ExampleQuestion]) -> dict:
     """
-    >>> _questions('question-1', [ExampleQuestion('question-1', 'answer-A'), ExampleQuestion('question-2', 'answer-B')])
-    {'answer-A': 1.0000000000000002, 'answer-B': 0.6666666666666667}
+    >>> _questions('question-1-3', [ExampleQuestion('question-1', 'answer-A'), ExampleQuestion('question-2', 'answer-B')])
+    {'answer-A': 0.8728715609439696, 'answer-B': 0.6546536707079772}
         """
     intents = dict.fromkeys(list(q.command_type for q in questions), 0)
     for question in questions:
