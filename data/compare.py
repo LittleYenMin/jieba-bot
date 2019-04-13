@@ -20,6 +20,8 @@ class QueryResult(object):
         for intent in intents:
             if top_scoring_intent is not None:
                 top_scoring_intent = intent if intent.score > top_scoring_intent.score else top_scoring_intent
+            else:
+                top_scoring_intent = intent
         self.topScoringIntent = top_scoring_intent
 
     def __init__(self, query_text: str, intents: [Intent]):
