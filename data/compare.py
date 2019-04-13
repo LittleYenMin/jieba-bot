@@ -36,7 +36,7 @@ class QueryResult(object):
 def questions(word: str, questions: [ExampleQuestion]) -> QueryResult:
     """
     >>> questions('question-1-3', [ExampleQuestion('question-1', 'answer-A'), ExampleQuestion('question-2', 'answer-B')])
-    [<Intent answer-A 0.8728715609439696>, <Intent answer-B 0.6546536707079772>]
+    <QueryResult query question-1-3 topScoringIntent <Intent answer-A 0.8728715609439696> intents [<Intent answer-A 0.8728715609439696>, <Intent answer-B 0.6546536707079772>]>
             """
     intents = _questions(word, questions)
     result = [Intent(intent=intent, score=score)
