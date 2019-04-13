@@ -29,6 +29,9 @@ class QueryResult(object):
         self.intents = intents
         self.__set_top_scoring(intents=intents)
 
+    def __repr__(self):
+        return '<QueryResult query {query} topScoringIntent {topScoringIntent} intents {intents}>'.format(query=self.query, topScoringIntent=self.topScoringIntent, intents=self.intents)
+
 
 def questions(word: str, questions: [ExampleQuestion]) -> [Intent]:
     """
