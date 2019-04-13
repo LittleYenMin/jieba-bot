@@ -13,6 +13,21 @@ class Intent(object):
             intent=self.intent, score=self.score)
 
 
+class QueryResult(object):
+
+    def __set_top_scoring(self, intents: [Intent]):
+        top_scoring_intent = None
+        for intent in intents:
+            if top_scoring_intent is not None:
+                top_scoring_intent = intent if intent.score > top_scoring_intent.score else top_scoring_intent
+        self.topScoringIntent = top_scoring_intent
+
+    def __init__(self, query_text: str, intents: [Intent]):
+        self.query = query_text
+        self.intents = intents
+        self.__set_top_scoring(intents=intents)
+
+
 def questions(word: str, questions: [ExampleQuestion]) -> [Intent]:
     """
     >>> questions('question-1-3', [ExampleQuestion('question-1', 'answer-A'), ExampleQuestion('question-2', 'answer-B')])
