@@ -34,25 +34,25 @@ class QueryResult(object):
             query=self.query, topScoringIntent=self.topScoringIntent, intents=self.intents)
 
 
-def questions(word: str, examples: [ExampleQuestion]) -> QueryResult:
+def questions(word: str, samples: [ExampleQuestion]) -> QueryResult:
     """
     >>> questions('question-1-3', [ExampleQuestion('question-1', 'answer-A'), ExampleQuestion('question-2', 'answer-B')])
     <QueryResult query question-1-3 topScoringIntent <Intent answer-A 0.8728715609439696> intents [<Intent answer-A 0.8728715609439696>, <Intent answer-B 0.6546536707079772>]>
             """
-    intents = _questions(word, examples)
+    intents = _questions(word, samples)
     result = [Intent(intent=intent, score=score)
               for intent, score in intents.items()]
     return QueryResult(query_text=word, intents=result)
 
 
-def _questions(word: str, examples: [ExampleQuestion]) -> dict:
+def _questions(word: str, samples: [ExampleQuestion]) -> dict:
     """
     >>> _questions('question-1-3', [ExampleQuestion('question-1', 'answer-A'), ExampleQuestion('question-2', 'answer-B')])
     {'answer-A': 0.8728715609439696, 'answer-B': 0.6546536707079772}
         """
-    intents = dict.fromkeys(list(q.command_type for q in examples), 0)
-    for example in examples:
-        command = example.command_type
-        similarity = nlu.similarity(example.question, word)
+    intents = dict.fromkeys(list(q.command_type for q in samples), 0)
+    for sample in samples:
+        command = sample.command_type
+        similarity = nlu.similarity(sample.question, word)
         intents[command] = max(similarity, intents.get(command, 0))
     return intents

@@ -38,7 +38,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    result = data.compare.questions(word=event.message.text, questions=data.source.from_csv_file('./data.csv'))
+    result = data.compare.questions(word=event.message.text, samples=data.source.from_csv_file('./data.csv'))
     json_str = json.dumps(result, default=lambda o: o.__dict__, ensure_ascii=False)
     line_bot_api.reply_message(
         event.reply_token,
