@@ -1,5 +1,5 @@
 import os
-
+import json
 
 from flask import Flask, request, abort
 from linebot import (
@@ -13,7 +13,8 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 
-import nlu
+import data.source
+import data.compare
 
 app = Flask(__name__)
 
@@ -37,10 +38,11 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    text = nlu.response_message(event.message.text)
+    result = data.compare.questions(word=event.message.text, questions=data.source.from_csv_file('./data.csv'))
+    json_str = json.dumps(result, default=lambda o: o.__dict__, ensure_ascii=False)
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=text))
+        TextSendMessage(text=json_str))
 
 
 if __name__ == "__main__":
