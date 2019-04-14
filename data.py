@@ -1,9 +1,9 @@
+import csv
 import json
 import operator
 
 import nlu
-
-from questions import ExampleQuestion
+import questions
 
 
 class Similarity(object):
@@ -39,14 +39,31 @@ class SimilarityResult(object):
         return json.dumps(self, default=lambda o: o.__dict__, ensure_ascii=False)
 
 
-def questions(word: str, samples: [ExampleQuestion]) -> SimilarityResult:
+def from_csv_file(path: str) -> [questions.ExampleQuestion]:
+    with open(path, 'r', encoding='utf-8') as f:
+        return from_csv(f)
+
+
+def from_csv(iterable: any) -> [questions.ExampleQuestion]:
+    result = []
+    csv_reader = csv.reader(iterable)
+    next(csv_reader, None)  # escape headers is useless here.
+    for row in csv_reader:
+        result.append(
+            questions.ExampleQuestion(
+                question=row[0],
+                command_type=row[1]))
+    return result
+
+
+def compare_questions(word: str, samples: [questions.ExampleQuestion]) -> SimilarityResult:
     intents = _questions(word, samples)
     return SimilarityResult(query_text=word, intents=intents)
 
 
-def _questions(word: str, samples: [ExampleQuestion]) -> [Similarity]:
+def _questions(word: str, samples: [questions.ExampleQuestion]) -> [Similarity]:
     """
-    >>> _questions('question-1-3', [ExampleQuestion('question-1', 'answer-A'), ExampleQuestion('question-2', 'answer-B')])
+    >>> _questions('question-1-3', [questions.ExampleQuestion('question-1', 'answer-A'), questions.ExampleQuestion('question-2', 'answer-B')])
     [<Intent answer-A 0.8728715609439696>, <Intent answer-B 0.6546536707079772>]
     """
     intents = dict.fromkeys(list(q.command_type for q in samples), 0)
