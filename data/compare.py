@@ -46,7 +46,7 @@ def questions(word: str, samples: [ExampleQuestion]) -> QueryResult:
 def _questions(word: str, samples: [ExampleQuestion]) -> [Intent]:
     """
     >>> _questions('question-1-3', [ExampleQuestion('question-1', 'answer-A'), ExampleQuestion('question-2', 'answer-B')])
-    {'answer-A': 0.8728715609439696, 'answer-B': 0.6546536707079772}
+    [<Intent answer-A 0.8728715609439696>, <Intent answer-B 0.6546536707079772>]
     """
     intents = dict.fromkeys(list(q.command_type for q in samples), 0)
     for sample in samples:
