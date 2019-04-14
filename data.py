@@ -12,7 +12,7 @@ class Similarity(object):
         self.score = score
 
     def __repr__(self):
-        return '<Intent {intent} {score}>'.format(
+        return '<Similarity {intent} {score}>'.format(
             intent=self.intent, score=self.score)
 
 
@@ -23,7 +23,7 @@ class SimilarityResult(object):
         self.intents = intents
 
     def __repr__(self):
-        return '<QueryResult query {query} topScoringIntent {topScoringIntent} intents {intents}>'.format(
+        return '<SimilarityResult query {query} topScoringIntent {topScoringIntent} intents {intents}>'.format(
             query=self.query, topScoringIntent=self.topScoringIntent, intents=self.intents)
 
     @property
