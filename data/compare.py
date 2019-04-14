@@ -14,7 +14,7 @@ class Intent(object):
             intent=self.intent, score=self.score)
 
 
-class QueryResult(object):
+class SimilarityResult(object):
 
     def __init__(self, query_text: str, intents: [Intent]):
         self.query = query_text
@@ -34,9 +34,9 @@ class QueryResult(object):
         self.topScoringIntent = max(self.intents, key=operator.attrgetter('score'))
 
 
-def questions(word: str, samples: [ExampleQuestion]) -> QueryResult:
+def questions(word: str, samples: [ExampleQuestion]) -> SimilarityResult:
     intents = _questions(word, samples)
-    return QueryResult(query_text=word, intents=intents)
+    return SimilarityResult(query_text=word, intents=intents)
 
 
 def _questions(word: str, samples: [ExampleQuestion]) -> [Intent]:
