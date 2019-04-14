@@ -33,10 +33,14 @@ class SimilarityResult(object):
     @intents.setter
     def intents(self, intents: [Similarity]):
         self._intents = intents
-        self.topScoringIntent = max(self.intents, key=operator.attrgetter('score'))
+        self.topScoringIntent = max(
+            self.intents, key=operator.attrgetter('score'))
 
     def to_json(self):
-        return json.dumps(self, default=lambda o: o.__dict__, ensure_ascii=False)
+        return json.dumps(
+            self,
+            default=lambda o: o.__dict__,
+            ensure_ascii=False)
 
 
 def from_csv_file(path: str) -> [questions.ExampleQuestion]:
@@ -56,12 +60,16 @@ def from_csv(iterable: any) -> [questions.ExampleQuestion]:
     return result
 
 
-def compare_questions(word: str, samples: [questions.ExampleQuestion]) -> SimilarityResult:
+def compare_questions(
+    word: str, samples: [
+        questions.ExampleQuestion]) -> SimilarityResult:
     intents = _questions(word, samples)
     return SimilarityResult(query_text=word, intents=intents)
 
 
-def _questions(word: str, samples: [questions.ExampleQuestion]) -> [Similarity]:
+def _questions(
+    word: str, samples: [
+        questions.ExampleQuestion]) -> [Similarity]:
     """
     >>> _questions('question-1-3', [questions.ExampleQuestion('question-1', 'answer-A'), questions.ExampleQuestion('question-2', 'answer-B')])
     [<Intent answer-A 0.8728715609439696>, <Intent answer-B 0.6546536707079772>]
