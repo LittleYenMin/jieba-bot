@@ -36,12 +36,12 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    similarty_result = data.compare_questions(
+    similarity_result = data.compare_questions(
         word=event.message.text,
         samples=data.from_csv_file('./data.csv'))
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=similarty_result.to_json()))
+        TextSendMessage(text=similarity_result.to_json()))
 
 
 if __name__ == "__main__":
