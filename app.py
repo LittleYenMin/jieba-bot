@@ -38,11 +38,10 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    result = data.compare.questions(word=event.message.text, samples=data.source.from_csv_file('./data.csv'))
-    json_str = json.dumps(result, default=lambda o: o.__dict__, ensure_ascii=False)
+    similarty_result = data.compare.questions(word=event.message.text, samples=data.source.from_csv_file('./data.csv'))
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=json_str))
+        TextSendMessage(text=similarty_result.to_json()))
 
 
 if __name__ == "__main__":

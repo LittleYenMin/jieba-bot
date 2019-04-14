@@ -1,4 +1,6 @@
+import json
 import operator
+
 import nlu
 
 from questions import ExampleQuestion
@@ -32,6 +34,9 @@ class SimilarityResult(object):
     def intents(self, intents: [Intent]):
         self._intents = intents
         self.topScoringIntent = max(self.intents, key=operator.attrgetter('score'))
+
+    def to_json(self):
+        return json.dumps(self, default=lambda o: o.__dict__, ensure_ascii=False)
 
 
 def questions(word: str, samples: [ExampleQuestion]) -> SimilarityResult:
