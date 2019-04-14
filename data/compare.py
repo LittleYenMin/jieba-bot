@@ -6,7 +6,7 @@ import nlu
 from questions import ExampleQuestion
 
 
-class Intent(object):
+class Similarity(object):
     def __init__(self, intent: str, score: float):
         self.intent = intent
         self.score = score
@@ -18,7 +18,7 @@ class Intent(object):
 
 class SimilarityResult(object):
 
-    def __init__(self, query_text: str, intents: [Intent]):
+    def __init__(self, query_text: str, intents: [Similarity]):
         self.query = query_text
         self.intents = intents
 
@@ -31,7 +31,7 @@ class SimilarityResult(object):
         return self._intents
 
     @intents.setter
-    def intents(self, intents: [Intent]):
+    def intents(self, intents: [Similarity]):
         self._intents = intents
         self.topScoringIntent = max(self.intents, key=operator.attrgetter('score'))
 
@@ -44,7 +44,7 @@ def questions(word: str, samples: [ExampleQuestion]) -> SimilarityResult:
     return SimilarityResult(query_text=word, intents=intents)
 
 
-def _questions(word: str, samples: [ExampleQuestion]) -> [Intent]:
+def _questions(word: str, samples: [ExampleQuestion]) -> [Similarity]:
     """
     >>> _questions('question-1-3', [ExampleQuestion('question-1', 'answer-A'), ExampleQuestion('question-2', 'answer-B')])
     [<Intent answer-A 0.8728715609439696>, <Intent answer-B 0.6546536707079772>]
@@ -54,5 +54,5 @@ def _questions(word: str, samples: [ExampleQuestion]) -> [Intent]:
         command = sample.command_type
         similarity = nlu.similarity(sample.question, word)
         intents[command] = max(similarity, intents.get(command, 0))
-    return [Intent(intent=intent, score=score)
+    return [Similarity(intent=intent, score=score)
             for intent, score in intents.items()]
