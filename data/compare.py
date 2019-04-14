@@ -40,12 +40,10 @@ def questions(word: str, samples: [ExampleQuestion]) -> QueryResult:
     <QueryResult query question-1-3 topScoringIntent <Intent answer-A 0.8728715609439696> intents [<Intent answer-A 0.8728715609439696>, <Intent answer-B 0.6546536707079772>]>
     """
     intents = _questions(word, samples)
-    result = [Intent(intent=intent, score=score)
-              for intent, score in intents.items()]
-    return QueryResult(query_text=word, intents=result)
+    return QueryResult(query_text=word, intents=intents)
 
 
-def _questions(word: str, samples: [ExampleQuestion]) -> dict:
+def _questions(word: str, samples: [ExampleQuestion]) -> [Intent]:
     """
     >>> _questions('question-1-3', [ExampleQuestion('question-1', 'answer-A'), ExampleQuestion('question-2', 'answer-B')])
     {'answer-A': 0.8728715609439696, 'answer-B': 0.6546536707079772}
@@ -55,4 +53,5 @@ def _questions(word: str, samples: [ExampleQuestion]) -> dict:
         command = sample.command_type
         similarity = nlu.similarity(sample.question, word)
         intents[command] = max(similarity, intents.get(command, 0))
-    return intents
+    return [Intent(intent=intent, score=score)
+            for intent, score in intents.items()]
