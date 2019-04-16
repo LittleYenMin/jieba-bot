@@ -1,6 +1,5 @@
 import csv
 import json
-import operator
 
 import nlu
 import questions
@@ -20,21 +19,15 @@ class SimilarityResult(object):
 
     def __init__(self, query_text: str, intents: [Similarity]):
         self.query = query_text
-        self.intents = intents
+        self.set_intents(intents)
 
     def __repr__(self):
         return '<SimilarityResult query {query} topScoringIntent {topScoringIntent} intents {intents}>'.format(
             query=self.query, topScoringIntent=self.topScoringIntent, intents=self.intents)
 
-    @property
-    def intents(self):
-        return self._intents
-
-    @intents.setter
-    def intents(self, intents: [Similarity]):
-        self._intents = intents
-        self.topScoringIntent = max(
-            self.intents, key=operator.attrgetter('score'))
+    def set_intents(self, intents: [Similarity]):
+        self.intents = intents
+        self.topScoringIntent = max(self.intents, key=lambda item: item.score)
 
     def to_json(self):
         return json.dumps(
