@@ -1,6 +1,5 @@
 import os
 
-
 from flask import Flask, request, abort
 from linebot import (
     LineBotApi, WebhookHandler
@@ -13,7 +12,7 @@ from linebot.models import (
     MessageEvent, TextMessage, TextSendMessage,
 )
 
-import nlu
+import data
 
 app = Flask(__name__)
 
@@ -37,10 +36,12 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    text = nlu.response_message(event.message.text)
+    similarity_result = data.compare_questions(
+        word=event.message.text,
+        samples=data.from_csv_file('./data.csv'))
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=text))
+        TextSendMessage(text=similarity_result.to_json()))
 
 
 if __name__ == "__main__":

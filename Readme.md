@@ -9,7 +9,7 @@ Bot for Chinese text segmentation
 LINE friend qrcode:
 ----------
 ![qrcode](https://i.imgur.com/uf5CDFZ.png)
-![real usage](https://i.imgur.com/ovx7s36.jpg)
+![real usage](readme/real-usage.jpg?raw=true)
 
 Reference
 ---------
